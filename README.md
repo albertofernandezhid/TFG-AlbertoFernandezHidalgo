@@ -52,3 +52,11 @@ Aplicación web para el registro de entrada/salida del personal con:
 🎯 ¿Por qué este enfoque?
    - Claridad: Destaca las funcionalidades clave para ambos perfiles (trabajador/empresa).
    - Modularidad: Facilita escalar con futuras integraciones (vacaciones, notificaciones).
+
+---
+
+📋 Diagrama de casos de uso
+
+<p align="center">
+  <img src="https://iili.io/3RGkP0N.png" alt="Diagrama de casos de uso">
+</p>
