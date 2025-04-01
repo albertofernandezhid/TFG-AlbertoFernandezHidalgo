@@ -1,4 +1,5 @@
 <h1 align="center">MarkTime ⏱️</h1>
+![MarkTime](https://freeimage.host/i/3RYvSnt)
 <p align="center"><i>Sistema de control horario inteligente para empresas</i></p>
 
 ## 📌 Descripción
