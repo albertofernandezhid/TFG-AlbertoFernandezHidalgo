@@ -36,7 +36,7 @@ Aplicación web para el registro de entrada/salida del personal con:
 
 | Área          | Tecnologías                  |
 |---------------|-----------------------------|
-| **Frontend**  | React.js + Material UI      |
+| **Frontend**  | Angular + Tailwind      |
 | **Backend**   | Node.js            |
 | **Base de datos** | PostgreSQL               |
 | **Autenticación** | JWT + Bcrypt           |
