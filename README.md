@@ -60,3 +60,11 @@ Aplicación web para el registro de entrada/salida del personal con:
 <p align="center">
   <img src="https://iili.io/3RGkP0N.png" alt="Diagrama de casos de uso">
 </p>
+
+---
+
+🃏 Diseño de interfaz
+
+![31jwAtS.png](https://iili.io/31jwAtS.png)
+![31jwTAl.png](https://iili.io/31jwTAl.png)
+![31jw5o7.png](https://iili.io/31jw5o7.png)
