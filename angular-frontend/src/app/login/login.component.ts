@@ -8,7 +8,6 @@ import { Location } from '@angular/common';
   selector: 'app-login',
   standalone: true,
   templateUrl: './login.component.html',
-  styleUrls: [],
   imports: [CommonModule, ReactiveFormsModule, RouterModule]
 })
 export class LoginComponent {

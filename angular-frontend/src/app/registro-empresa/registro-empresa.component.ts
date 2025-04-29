@@ -7,7 +7,6 @@ import { Location } from '@angular/common';
 @Component({
   selector: 'app-registro-empresa',
   templateUrl: './registro-empresa.component.html',
-  styleUrls: ['./registro-empresa.component.css'],
   imports: [CommonModule, ReactiveFormsModule, RouterModule]
 })
 export class RegistroEmpresaComponent implements OnInit {

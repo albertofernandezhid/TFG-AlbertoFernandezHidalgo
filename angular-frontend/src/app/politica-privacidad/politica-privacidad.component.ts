@@ -6,8 +6,7 @@ import { Location } from '@angular/common';
 @Component({
   selector: 'app-politica-privacidad',
   imports: [CommonModule, RouterModule],
-  templateUrl: './politica-privacidad.component.html',
-  styleUrl: './politica-privacidad.component.css'
+  templateUrl: './politica-privacidad.component.html'
 })
 export class PoliticaPrivacidadComponent {
 
