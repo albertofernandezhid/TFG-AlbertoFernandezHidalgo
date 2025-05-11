@@ -1,0 +1,34 @@
+// src/app/components/empleados/empleados.component.ts
+import { Component, OnInit } from '@angular/core';
+import { EmpleadosService } from '../services/empleados.service';
+
+@Component({
+  selector: 'app-empleados',
+  templateUrl: './empleados.component.html',
+})
+export class EmpleadosComponent implements OnInit {
+  empleados: any[] = [];
+  empleadoSeleccionado: any;
+
+  constructor(private empleadosService: EmpleadosService) {}
+
+  ngOnInit(): void {
+    this.cargarEmpleados();
+  }
+
+  cargarEmpleados(): void {
+    this.empleadosService.getEmpleados().subscribe(
+      (data) => {
+        this.empleados = data;
+      },
+      (error) => {
+        console.error('Error al cargar empleados', error);
+      }
+    );
+  }
+
+  mostrarDetalles(empleado: any): void {
+    this.empleadoSeleccionado = empleado;
+    // Aquí puedes agregar lógica para mostrar detalles adicionales de los empleados
+  }
+}

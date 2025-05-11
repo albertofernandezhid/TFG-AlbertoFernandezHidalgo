@@ -9,8 +9,6 @@ import { AuthService } from '@auth0/auth0-angular';
   standalone: true, 
   imports: [CommonModule, RouterModule],
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
-  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class HomeComponent implements OnInit {
   private authservice = inject(AuthService);

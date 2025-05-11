@@ -1,39 +1,33 @@
 <div class="max-w-5xl mx-auto p-5">
-    <section class="bg-white p-6 rounded-xl shadow-md">
-      <div class="flex gap-4 mb-6">
-        <button class="py-2 px-6 border border-gray-300 bg-gray-100 rounded-lg font-medium hover:bg-indigo-600 hover:text-white transition duration-200 ease-in-out active:bg-indigo-500">Empleados</button>
-        <button class="py-2 px-6 border border-gray-300 bg-gray-100 rounded-lg font-medium hover:bg-indigo-600 hover:text-white transition duration-200 ease-in-out active:bg-indigo-500">Gestión de usuarios</button>
-      </div>
+  <section class="bg-white p-6 rounded-xl shadow-md">
+    <div class="flex gap-4 mb-6">
+      <button 
+        [ngClass]="{
+          'py-2 px-6 border rounded-lg font-medium transition duration-200 ease-in-out': true,
+          'border-indigo-600 bg-indigo-600 text-white': activeSection === 'empleados',
+          'border-gray-300 bg-gray-100 hover:bg-indigo-600 hover:text-white': activeSection !== 'empleados'
+        }"
+        (click)="setActiveSection('empleados')">
+        Empleados
+      </button>
+      <button 
+        [ngClass]="{
+          'py-2 px-6 border rounded-lg font-medium transition duration-200 ease-in-out': true,
+          'border-indigo-600 bg-indigo-600 text-white': activeSection === 'usuarios',
+          'border-gray-300 bg-gray-100 hover:bg-indigo-600 hover:text-white': activeSection !== 'usuarios'
+        }"
+        (click)="setActiveSection('usuarios')">
+        Crear usuario
+      </button>
+    </div>
 
-      <table class="w-full table-auto text-sm mb-6">
-        <thead>
-          <tr class="bg-gray-200">
-            <th class="px-4 py-3 text-left">Empleado</th>
-            <th class="px-4 py-3 text-left">Estado</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="hover:bg-gray-50">
-            <td class="px-4 py-3">Juan Pérez</td>
-            <td class="px-4 py-3 text-blue-600">🔵 Activo</td>
-          </tr>
-          <tr class="hover:bg-gray-50">
-            <td class="px-4 py-3">Ana Gonzalez</td>
-            <td class="px-4 py-3 text-red-600">🔴 Inactivo</td>
-          </tr>
-          <tr class="hover:bg-gray-50">
-            <td class="px-4 py-3">Victor Rodriguez</td>
-            <td class="px-4 py-3 text-blue-600">🔵 Activo</td>
-          </tr>
-          <tr class="hover:bg-gray-50">
-            <td class="px-4 py-3">Laura Gómez</td>
-            <td class="px-4 py-3 text-blue-600">🔵 Activo</td>
-          </tr>
-          <tr class="hover:bg-gray-50">
-            <td class="px-4 py-3">Antonio Martín</td>
-            <td class="px-4 py-3 text-red-600">🔴 Inactivo</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-  </div>
+    <!-- Añade estos contenedores para los componentes -->
+    <div *ngIf="activeSection === 'empleados'">
+      <app-empleados></app-empleados>
+    </div>
+
+    <div *ngIf="activeSection === 'usuarios'">
+      <app-gestion-usuarios></app-gestion-usuarios>
+    </div>
+  </section>
+</div>

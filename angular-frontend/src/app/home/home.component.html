@@ -6,16 +6,9 @@
             <h1 class="text-2xl font-bold text-blue-700 mb-0">Marktime</h1>
           </div>
           <div>
-            <button class="text-blue-500 hover:text-blue-700 font-semibold" (click)="login()">
+            <button class="cursor-pointer text-blue-500 hover:text-blue-700 font-semibold" (click)="login()">
               Iniciar sesión
             </button>            
-              <a [routerLink]="['/dashboard-empresa']" class="text-blue-500 hover:text-blue-700 font-semibold ml-5 mr-5">
-                Empresas
-              </a>
-              <a [routerLink]="['/dashboard-empleado']" class="text-blue-500 hover:text-blue-700 font-semibold">
-                Empleados
-              </a>
-            </a>
           </div>
         </div>
       </div>
@@ -155,9 +148,6 @@
           </div>
         </div>
       </footer>
-      
-
   </div>
-  
 
 <router-outlet />
