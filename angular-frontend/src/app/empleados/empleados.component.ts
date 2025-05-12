@@ -1,10 +1,13 @@
 // src/app/components/empleados/empleados.component.ts
 import { Component, OnInit } from '@angular/core';
 import { EmpleadosService } from '../services/empleados.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-empleados',
   templateUrl: './empleados.component.html',
+  imports: [CommonModule]
+
 })
 export class EmpleadosComponent implements OnInit {
   empleados: any[] = [];
