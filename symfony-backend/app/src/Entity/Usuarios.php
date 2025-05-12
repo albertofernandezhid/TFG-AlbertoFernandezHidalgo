@@ -1,5 +1,4 @@
-// src/Entity/Usuarios.php
-
+<?php
 namespace App\Entity;
 
 use App\Repository\UsuariosRepository;
