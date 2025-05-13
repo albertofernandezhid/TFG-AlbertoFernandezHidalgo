@@ -1,5 +1,4 @@
-// src/Controller/UsuariosController.php
-
+<?php
 namespace App\Controller;
 
 use App\Entity\Usuarios;
@@ -14,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 class UsuariosController extends AbstractController
 {
     #[Route('/api/usuarios', name: 'crear_usuario', methods: ['POST'])]
-    public function crearUsuario(Request $request, EntityManagerInterface $em, SerializerInterface $serializer): Response
+    public function crearUsuario(Request $request, EntityManagerInterface $em): Response
     {
         $data = json_decode($request->getContent(), true);
 

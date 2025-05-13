@@ -1,4 +1,4 @@
-// src/Controller/EmpleadosController.php
+<?php
 namespace App\Controller;
 
 use App\Entity\Empleado;
