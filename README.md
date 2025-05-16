@@ -69,15 +69,23 @@ Aplicación web para el registro de entrada/salida del personal con:
 
 ---
 
-🃏 Diseño de interfaz inicial
+## 🃏 Diseño de interfaz inicial
+
+**Login:**
 
 ![31jwAtS.png](https://iili.io/31jwAtS.png)
+
+**Panel de empresa**
+
 ![31jwTAl.png](https://iili.io/31jwTAl.png)
+
+**Panel de empleado**
+
 ![31jw5o7.png](https://iili.io/31jw5o7.png)
 
 ---
 
-🃏 Diseño de interfaz final
+## 🃏 Diseño de interfaz final
 
 **Landing page:**
 
@@ -85,7 +93,7 @@ Aplicación web para el registro de entrada/salida del personal con:
 
 **Footer:**
 
-![Footer](https://iili.io/3rDRoRs.png)
+![Footer](https://iili.io/3rp7VkP.png)
 
 **Registra tu empresa:**
 
