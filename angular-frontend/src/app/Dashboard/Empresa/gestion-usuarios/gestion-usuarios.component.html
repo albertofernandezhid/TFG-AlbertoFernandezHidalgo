@@ -1,0 +1,185 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+  <!-- Datos personales -->
+  <div class="col-span-full mb-2">
+    <h3 class="text-lg font-semibold text-gray-700">Datos Personales</h3>
+    <p class="text-sm text-gray-500">Los campos marcados con <span class="text-red-500">*</span> son obligatorios</p>
+  </div>
+
+  <div class="flex flex-col">
+    <label for="nombre" class="text-sm text-black mb-1">
+      Nombre <span class="text-red-500">*</span>
+    </label>
+    <input id="nombre" formControlName="nombre" type="text" placeholder="Nombre" 
+      class="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+      [ngClass]="{'border-gray-800': !isFieldInvalid('nombre'), 'border-red-500': isFieldInvalid('nombre')}" />
+    <div *ngIf="isFieldInvalid('nombre')" class="text-red-500 text-xs mt-1">
+      {{ getErrorMessage('nombre') }}
+    </div>
+  </div>
+
+  <div class="flex flex-col">
+    <label for="apellidos" class="text-sm text-black mb-1">
+      Apellidos <span class="text-red-500">*</span>
+    </label>
+    <input id="apellidos" formControlName="apellidos" type="text" placeholder="Apellidos" 
+      class="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+      [ngClass]="{'border-gray-800': !isFieldInvalid('apellidos'), 'border-red-500': isFieldInvalid('apellidos')}" />
+    <div *ngIf="isFieldInvalid('apellidos')" class="text-red-500 text-xs mt-1">
+      {{ getErrorMessage('apellidos') }}
+    </div>
+  </div>
+
+  <div class="flex flex-col">
+    <label for="dni" class="text-sm text-black mb-1">
+      DNI <span class="text-red-500">*</span>
+    </label>
+    <input id="dni" formControlName="dni" type="text" placeholder="12345678A" 
+      class="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+      [ngClass]="{'border-gray-800': !isFieldInvalid('dni'), 'border-red-500': isFieldInvalid('dni')}" />
+    <div *ngIf="isFieldInvalid('dni')" class="text-red-500 text-xs mt-1">
+      {{ getErrorMessage('dni') }}
+    </div>
+  </div>
+
+  <div class="flex flex-col">
+    <label for="fechaNacimiento" class="text-sm text-black mb-1">
+      Fecha de Nacimiento <span class="text-red-500">*</span>
+    </label>
+    <input id="fechaNacimiento" type="date" formControlName="fechaNacimiento" 
+      class="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+      [ngClass]="{'border-gray-800': !isFieldInvalid('fechaNacimiento'), 'border-red-500': isFieldInvalid('fechaNacimiento')}" />
+    <div *ngIf="isFieldInvalid('fechaNacimiento')" class="text-red-500 text-xs mt-1">
+      {{ getErrorMessage('fechaNacimiento') }}
+    </div>
+  </div>
+
+  <div class="flex flex-col">
+    <label for="sexo" class="text-sm text-black mb-1">
+      Sexo <span class="text-red-500">*</span>
+    </label>
+    <select id="sexo" formControlName="sexo" 
+      class="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+      [ngClass]="{'border-gray-800': !isFieldInvalid('sexo'), 'border-red-500': isFieldInvalid('sexo')}">
+      <option value="">Selecciona</option>
+      <option value="M">Masculino</option>
+      <option value="F">Femenino</option>
+      <option value="O">Otro</option>
+    </select>
+    <div *ngIf="isFieldInvalid('sexo')" class="text-red-500 text-xs mt-1">
+      {{ getErrorMessage('sexo') }}
+    </div>
+  </div>
+
+  <div class="flex flex-col">
+    <label for="emailPersonal" class="text-sm text-black mb-1">
+      Email Personal <span class="text-red-500">*</span>
+    </label>
+    <input id="emailPersonal" formControlName="emailPersonal" type="email" placeholder="ejemplo@correo.com" 
+      class="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+      [ngClass]="{'border-gray-800': !isFieldInvalid('emailPersonal'), 'border-red-500': isFieldInvalid('emailPersonal')}" />
+    <div *ngIf="isFieldInvalid('emailPersonal')" class="text-red-500 text-xs mt-1">
+      {{ getErrorMessage('emailPersonal') }}
+    </div>
+  </div>
+
+  <div class="flex flex-col">
+    <label for="telefonoPersonal" class="text-sm text-black mb-1">
+      Teléfono Personal <span class="text-red-500">*</span>
+    </label>
+    <input id="telefonoPersonal" formControlName="telefonoPersonal" type="text" placeholder="123456789" 
+      class="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+      [ngClass]="{'border-gray-800': !isFieldInvalid('telefonoPersonal'), 'border-red-500': isFieldInvalid('telefonoPersonal')}"
+      maxlength="9"
+      (keypress)="onlyDigits($event)" />
+    <div *ngIf="isFieldInvalid('telefonoPersonal')" class="text-red-500 text-xs mt-1">
+      {{ getErrorMessage('telefonoPersonal') }}
+    </div>
+  </div>
+
+  <!-- Dirección -->
+  <div class="col-span-full mt-4 mb-2">
+    <h3 class="text-lg font-semibold text-gray-700">Dirección</h3>
+  </div>
+
+  <div class="col-span-full flex flex-col">
+    <label for="calle" class="text-sm text-black mb-1">Calle</label>
+    <input id="calle" formControlName="calle" placeholder="Calle" 
+      class="border border-gray-800 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+  </div>
+
+  <div class="col-span-full grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="flex flex-col">
+      <label for="ciudad" class="text-sm text-black mb-1">Ciudad</label>
+      <input id="ciudad" formControlName="ciudad" placeholder="Ciudad" 
+        class="border border-gray-800 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+    </div>
+
+    <div class="flex flex-col">
+      <label for="codigoPostal" class="text-sm text-black mb-1">Código Postal</label>
+      <input id="codigoPostal" formControlName="codigoPostal" placeholder="CP" 
+        class="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        [ngClass]="{'border-gray-800': !isFieldInvalid('codigoPostal'), 'border-red-500': isFieldInvalid('codigoPostal')}" />
+      <div *ngIf="isFieldInvalid('codigoPostal')" class="text-red-500 text-xs mt-1">
+        {{ getErrorMessage('codigoPostal') }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Acceso -->
+  <div class="col-span-full mt-4 mb-2">
+    <h3 class="text-lg font-semibold text-gray-700">Datos de Acceso</h3>
+  </div>
+
+  <!-- Usuario -->
+  <div class="flex flex-col">
+    <label for="username" class="text-sm text-black mb-1">
+      Usuario <span class="text-red-500">*</span>
+    </label>
+    <input id="username" formControlName="username" placeholder="Usuario"
+      class="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+      [ngClass]="{'border-gray-800': !isFieldInvalid('username'), 'border-red-500': isFieldInvalid('username')}" />
+    <div *ngIf="isFieldInvalid('username')" class="text-red-500 text-xs mt-1">
+      {{ getErrorMessage('username') }}
+    </div>
+  </div>
+
+  <!-- Espacio vacío para mantener el balance de la cuadrícula -->
+  <div></div>
+
+  <!-- Contraseñas -->
+  <div class="col-span-full grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="flex flex-col">
+      <label for="password" class="text-sm text-black mb-1">
+        Contraseña <span class="text-red-500">*</span>
+      </label>
+      <input id="password" type="password" formControlName="password" placeholder="Contraseña"
+        class="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        [ngClass]="{'border-gray-800': !isFieldInvalid('password'), 'border-red-500': isFieldInvalid('password')}" />
+      <div *ngIf="isFieldInvalid('password')" class="text-red-500 text-xs mt-1">
+        {{ getErrorMessage('password') }}
+      </div>
+    </div>
+
+    <div class="flex flex-col">
+      <label for="passwordRepeat" class="text-sm text-black mb-1">
+        Verificar contraseña <span class="text-red-500">*</span>
+      </label>
+      <input id="passwordRepeat" type="password" formControlName="passwordRepeat" placeholder="Verificar contraseña"
+        class="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        [ngClass]="{'border-gray-800': !isFieldInvalid('passwordRepeat'), 'border-red-500': isFieldInvalid('passwordRepeat')}" />
+      <div *ngIf="isFieldInvalid('passwordRepeat')" class="text-red-500 text-xs mt-1">
+        {{ getErrorMessage('passwordRepeat') }}
+      </div>
+    </div>
+  </div>
+
+  <div class="col-span-full flex justify-center mt-8">
+    <button 
+      type="submit" 
+      class="w-full sm:w-1/6 text-white py-3 rounded-lg cursor-pointer bg-blue-600 hover:bg-blue-700">
+      Crear Usuario
+    </button>
+  </div>
+
+</form>

@@ -1,0 +1,82 @@
+<div>
+  <div class="mb-6 flex items-center max-w-md ml-auto justify-between">
+    <!-- Botón PDF -->
+    <button
+      (click)="exportPdf()"
+      class="ml-8 p-2 rounded hover:bg-indigo-100 transition"
+      title="Exportar PDF"
+      aria-label="Exportar PDF"
+    >
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/5453/5453995.png"
+        alt="Exportar PDF"
+        class="w-7 h-7"
+      />
+    </button>
+
+    <!-- Filtros -->
+    <div class="flex items-center gap-4 ml-auto">
+      <label for="month" class="text-sm font-medium text-gray-700 whitespace-nowrap">Mes:</label>
+      <select
+        id="month"
+        [(ngModel)]="selectedMonth"
+        name="month"
+        class="block w-35 px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-left"
+      >
+        <option value="01">Enero</option>
+        <option value="02">Febrero</option>
+        <option value="03">Marzo</option>
+        <option value="04">Abril</option>
+        <option value="05">Mayo</option>
+        <option value="06">Junio</option>
+        <option value="07">Julio</option>
+        <option value="08">Agosto</option>
+        <option value="09">Septiembre</option>
+        <option value="10">Octubre</option>
+        <option value="11">Noviembre</option>
+        <option value="12">Diciembre</option>
+      </select>
+
+
+      <label for="year" class="text-sm font-medium text-gray-700 whitespace-nowrap">Año:</label>
+      <select
+        id="year"
+        [(ngModel)]="selectedYear"
+        name="year"
+        class="block w-30 px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+      >
+        <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Tabla -->
+  <table class="w-full table-auto text-sm mb-6">
+    <thead>
+      <tr class="bg-gray-200">
+        <th class="px-4 py-3 text-left">Fecha</th>
+        <th class="px-4 py-3 text-left">Entrada</th>
+        <th class="px-4 py-3 text-left">Salida</th>
+        <th class="px-4 py-3 text-left">Total horas</th>
+        <th class="px-4 py-3 text-left">Lugar</th>
+        <th class="px-4 py-3 text-left">Evento</th>
+        <th class="px-4 py-3 text-left">Comentarios</th>
+        <th class="px-4 py-3 text-left">Gastos</th>
+        <th class="px-4 py-3 text-left">Archivos</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let registro of registrosFiltrados" class="hover:bg-gray-50">
+        <td class="px-4 py-3">{{ registro.fecha }}</td>
+        <td class="px-4 py-3">{{ registro.entrada }}</td>
+        <td class="px-4 py-3">{{ registro.salida }}</td>
+        <td class="px-4 py-3">{{ registro.totalHoras }}</td>
+        <td class="px-4 py-3">{{ registro.lugar || '' }}</td>
+        <td class="px-4 py-3">{{ registro.evento || '' }}</td>
+        <td class="px-4 py-3">{{ registro.comentarios || '' }}</td>
+        <td class="px-4 py-3">{{ registro.gastos || '' }}</td>
+        <td class="px-4 py-3">{{ registro.archivos || '' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

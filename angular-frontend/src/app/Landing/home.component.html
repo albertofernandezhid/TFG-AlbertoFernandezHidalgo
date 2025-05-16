@@ -1,0 +1,153 @@
+<div class="min-h-screen flex flex-col bg-gray-200">
+    <header class="bg-white shadow-md">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16 items-center">
+          <div class="flex-shrink-0">
+            <h1 class="text-2xl font-bold text-blue-700 mb-0">Marktime</h1>
+          </div>
+          <div>
+            <button class="cursor-pointer text-blue-500 hover:text-blue-700 font-semibold" (click)="login()">
+              Iniciar sesión
+            </button>            
+          </div>
+        </div>
+      </div>
+    </header>
+  
+    <main class="flex-grow">
+      <!-- Hero section -->
+      <div class="relative bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+          <div class="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
+            <svg class="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2" fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+              <polygon points="50,0 100,0 50,100 0,100" />
+            </svg>
+  
+            <div class="pt-10 mx-auto max-w-7xl px-4 sm:pt-12 sm:px-6 md:pt-16 lg:pt-20 lg:px-8 xl:pt-28">
+              <div class="sm:text-center lg:text-left">
+                <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+                  <span class="block">Control de horario</span>
+                  <span class="block text-blue-700">fácil y eficiente</span>
+                </h1>
+                <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+                  Registra entradas, salidas y eventos laborales. Gestiona el tiempo de tus empleados de forma sencilla con nuestra plataforma de control horario.
+                </p>
+                <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
+                  <div class="rounded-md shadow">
+                    <a [routerLink]="['/registro-empresa']" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-700 hover:bg-blue-800 md:py-4 md:text-lg md:px-10">
+                      Registra tu empresa
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+          <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Team working together">
+        </div>
+      </div>
+  
+      <!-- Feature section -->
+      <div class="py-12 bg-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="lg:text-center">
+            <h2 class="text-base text-blue-500 font-semibold tracking-wide uppercase">Características</h2>
+            <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+              Una mejor manera de gestionar el tiempo
+            </p>
+            <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+              Todo lo que necesitas para llevar un control preciso del tiempo de tus empleados.
+            </p>
+          </div>
+  
+          <div class="mt-10">
+            <dl class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
+              <div class="relative">
+                <dt>
+                  <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                  </div>
+                  <p class="ml-16 text-lg leading-6 font-medium text-gray-900">Registro de tiempo flexible</p>
+                </dt>
+                <dd class="mt-2 ml-16 text-base text-gray-500">
+                  Permite a los empleados registrar sus horas de entrada y salida de forma sencilla, desde cualquier dispositivo.
+                </dd>
+              </div>
+  
+              <div class="relative">
+                <dt>
+                  <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                    </svg>
+                  </div>
+                  <p class="ml-16 text-lg leading-6 font-medium text-gray-900">Gestión de usuarios</p>
+                </dt>
+                <dd class="mt-2 ml-16 text-base text-gray-500">
+                  Las empresas pueden crear, editar y gestionar sus empleados fácilmente desde un panel de control intuitivo.
+                </dd>
+              </div>
+  
+              <div class="relative">
+                <dt>
+                  <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                    </svg>
+                  </div>
+                  <p class="ml-16 text-lg leading-6 font-medium text-gray-900">Exportación de datos</p>
+                </dt>
+                <dd class="mt-2 ml-16 text-base text-gray-500">
+                  Exporta los registros horarios por meses para tener un control del tiempo trabajado y facilitar la gestión de nóminas.
+                </dd>
+              </div>
+  
+              <div class="relative">
+                <dt>
+                  <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                    </svg>
+                  </div>
+                  <p class="ml-16 text-lg leading-6 font-medium text-gray-900">Documentación adjunta</p>
+                </dt>
+                <dd class="mt-2 ml-16 text-base text-gray-500">
+                  Adjunta documentos, imágenes o cualquier otro archivo relevante a los registros horarios para un control más detallado.
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+          <!-- Contenedor de los textos principales -->
+          <div class="text-center sm:text-left">
+            <p class="text-sm sm:text-base mb-2">
+              <span class="font-semibold">© 2025 Marktime. Todos los derechos reservados.</span>
+            </p>
+            <p class="text-sm sm:text-base text-gray-400">
+              Proyecto desarrollado como parte del Trabajo de Fin de Grado (TFG) del ciclo de <strong>Desarrollo de Aplicaciones Web (DAW)</strong> en <strong>Cesur Málaga</strong>, modalidad <strong>Online</strong>.
+            </p>
+            <p class="mt-2 text-sm sm:text-base text-gray-400">
+              Desarrollado por <strong class="font-semibold text-blue-500">Alberto Fernández Hidalgo</strong>.
+            </p>
+          </div>
+      
+          <!-- Enlaces adicionales -->
+          <div class="mt-6 flex justify-center space-x-8">
+            <a href="https://www.cesurformacion.com/" target="_blank" class="text-sm text-gray-300 hover:text-blue-400 transition">Cesur Málaga</a>
+            <a href="https://github.com/albertofernandezhid" target="_blank" class="text-sm text-gray-300 hover:text-blue-400 transition">GitHub</a>
+            <a href="https://www.linkedin.com/in/albertofern%C3%A1ndezhidalgo/" target="_blank" class="text-sm text-gray-300 hover:text-blue-400 transition">Linkedin</a>
+            <a href="/politica-privacidad" class="text-sm text-gray-300 hover:text-blue-400 transition">Política de privacidad</a>
+          </div>
+        </div>
+      </footer>
+  </div>
+
+<router-outlet />

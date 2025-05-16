@@ -2,11 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule, RouterOutlet, Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import jwt_decode from 'jwt-decode';
+import { CredentialsInterceptor } from './interceptors/credentials.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, RouterModule],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CredentialsInterceptor,
+      multi: true
+    }
+  ],
   template: `<router-outlet></router-outlet>`,
 })
 export class AppComponent implements OnInit {

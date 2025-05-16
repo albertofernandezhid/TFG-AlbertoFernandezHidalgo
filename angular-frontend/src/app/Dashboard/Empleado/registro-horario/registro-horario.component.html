@@ -1,0 +1,93 @@
+<div class="flex items-center justify-center bg-gray-200/0">
+  <div class="container max-w-4xl mx-auto bg-white">
+    <!-- Formulario de entrada -->
+    <form [formGroup]="fichajeForm" (ngSubmit)="onSubmit('entrada')" *ngIf="!entradaFichada" class="grid grid-cols-1 gap-6 p-6">
+      
+      <div class="flex flex-col">
+        <label class="text-sm text-black mb-1 flex items-center gap-2">
+          <input type="checkbox" formControlName="usarFechaHoraActual" class="accent-blue-600" />
+          Usar fecha y hora actuales
+        </label>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6" *ngIf="!usarFechaHoraActual">
+        <div class="flex flex-col">
+          <label class="text-sm text-black mb-1">Fecha</label>
+          <input type="date" formControlName="fecha" class="border border-gray-800 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+        </div>
+        
+        <div class="flex flex-col">
+          <label class="text-sm text-black mb-1">Hora</label>
+          <input type="time" formControlName="horaEntrada" class="border border-gray-800 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+        </div>
+      </div>
+
+      <div class="col-span-full flex justify-center mt-4">
+        <button type="submit" class="w-full sm:w-1/6 bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 cursor-pointer">
+          Fichar entrada
+        </button>
+      </div>
+    </form>
+
+    <!-- Formulario de salida -->
+    <form [formGroup]="fichajeForm" (ngSubmit)="onSubmit('salida')" *ngIf="entradaFichada" class="grid grid-cols-1 gap-6 p-6">
+      
+      <div class="bg-gray-100 p-3 rounded mb-2">
+        <p class="font-medium">Entrada registrada el día {{formatearFecha(fechaEntrada)}} a las {{horaEntrada}}</p>
+      </div>
+      
+      <div class="flex flex-col">
+        <label class="text-sm text-black mb-1 flex items-center gap-2">
+          <input type="checkbox" formControlName="usarHoraSalidaActual" class="accent-blue-600" />
+          Usar hora actual para la salida
+        </label>
+      </div>
+      
+      <div class="flex flex-col">
+        <label for="horaSalida" class="text-sm text-black mb-1">Hora de salida <span class="text-red-500">*</span></label>
+        <input id="horaSalida" type="time" formControlName="horaSalida" class="border border-gray-800 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400" [readOnly]="fichajeForm.get('usarHoraSalidaActual')?.value" />
+      </div>
+
+      <div class="flex flex-col">
+        <label for="lugar" class="text-sm text-black mb-1">Lugar <span class="text-red-500">*</span></label>
+        <input id="lugar" type="text" formControlName="lugar" placeholder="Lugar de trabajo" class="border border-gray-800 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+      </div>
+
+      <div class="flex flex-col">
+        <label for="evento" class="text-sm text-black mb-1">Evento (opcional)</label>
+        <input id="evento" type="text" formControlName="evento" placeholder="Evento" class="border border-gray-800 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+      </div>
+
+      <div class="flex flex-col">
+        <label for="comentarios" class="text-sm text-black mb-1">Comentarios adicionales (opcional)</label>
+        <textarea id="comentarios" formControlName="comentarios" rows="3" placeholder="Comentarios" class="border border-gray-800 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="flex flex-col">
+          <label for="gastos" class="text-sm text-black mb-1">Gastos (opcional)</label>
+          <input id="gastos" type="number" formControlName="gastos" placeholder="0.00" class="border border-gray-800 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400" min="0" />
+        </div>
+        
+        <div class="flex flex-col">
+          <label for="imagen" class="text-sm text-black mb-1">Subir imagen (opcional)</label>
+          <div class="relative border border-gray-800 rounded-lg p-3 h-[46px] flex items-center">
+            <label class="cursor-pointer bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded inline-block">
+              <span>Seleccionar archivo</span>
+              <input id="imagen" type="file" (change)="onImagenSeleccionada($event)" class="hidden" />
+            </label>
+            <span class="ml-2 text-sm text-gray-600" *ngIf="fichajeForm.get('imagen')?.value">
+              Archivo seleccionado
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-span-full flex justify-center mt-4">
+        <button type="submit" class="w-full sm:w-1/6 bg-red-600 text-white py-3 rounded-lg hover:bg-red-700 cursor-pointer">
+          Fichar salida
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

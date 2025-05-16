@@ -1,0 +1,11 @@
+{
+    "/api": {
+      "target": "http://marktime_backend:8000",
+      "secure": false,
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/api": ""
+      }
+    }
+  }
+  

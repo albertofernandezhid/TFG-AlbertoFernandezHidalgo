@@ -7,11 +7,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class EmpleadosService {
-  private apiUrl = 'http://localhost:8000/api/empleados'; // Ajusta la URL a tu API
+  private apiUrl = '/api/empleados';
 
   constructor(private http: HttpClient) {}
 
   getEmpleados(): Observable<any> {
-    return this.http.get<any>(this.apiUrl);
+    return this.http.get<any>(this.apiUrl, { withCredentials: true });
   }
 }
