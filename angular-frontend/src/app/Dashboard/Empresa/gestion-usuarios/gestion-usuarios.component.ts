@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
-import { UsuariosService } from '../../../services/usuarios.service';
+import { EMPRESACrearUsuariosService } from '../../../services/empresa-crear-usuarios.service';
 
 export function passwordMatchValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -49,7 +49,7 @@ export class GestionUsuariosComponent implements OnInit {
   form: FormGroup;
   submitted = false;
 
-  constructor(private fb: FormBuilder, private usuariosService: UsuariosService) {
+  constructor(private fb: FormBuilder, private usuariosService: EMPRESACrearUsuariosService) {
     this.form = this.fb.group({
       nombre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       apellidos: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],

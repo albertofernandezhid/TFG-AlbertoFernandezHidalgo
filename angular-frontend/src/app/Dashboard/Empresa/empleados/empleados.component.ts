@@ -1,7 +1,7 @@
 // src/app/components/empleados/empleados.component.ts
 import { Component, OnInit } from '@angular/core';
-import { EmpleadosService } from '../../../services/empleados.service';
 import { CommonModule } from '@angular/common';
+import { EMPRESAListaUsuariosService } from '../../../services/empresa-lista-usuarios.service';
 
 @Component({
   selector: 'app-empleados',
@@ -14,7 +14,7 @@ export class EmpleadosComponent implements OnInit {
   empleados: any[] = [];
   empleadoSeleccionado: any;
 
-  constructor(private empleadosService: EmpleadosService) {}
+  constructor(private empleadosService: EMPRESAListaUsuariosService) {}
 
   ngOnInit(): void {
     this.cargarEmpleados();
