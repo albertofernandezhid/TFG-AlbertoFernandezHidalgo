@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { Location } from '@angular/common';
+import { RegistroempresaService } from '../../services/registroempresa.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-registro-empresa',
@@ -14,7 +16,8 @@ export class RegistroEmpresaComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private location: Location
+    private location: Location,
+      private empresaService: RegistroempresaService
   ) { }
 
   ngOnInit(): void {
@@ -26,7 +29,7 @@ export class RegistroEmpresaComponent implements OnInit {
       telefono: ['', [Validators.required, Validators.pattern('^[0-9]{9}$') ]], 
       direccion: ['', Validators.required],
       usuarioAdmin: ['', Validators.required],
-      contrasenaAdmin: ['', [Validators.required, Validators.minLength(8), Validators.pattern('^(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&])[A-Za-z0-9@$!%*?&]{8,}$')]], // Contraseña con requisitos
+      contrasenaAdmin: ['', [Validators.required, Validators.minLength(8), Validators.pattern('^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@\\$%\\*\\?&\\.\\-])[A-Za-z0-9!@\\$%\\*\\?&\\.\\-]{8,}$')]], // Contraseña con requisitos
       verificarContrasenaAdmin: ['', Validators.required]
     }, {
       validators: this.passwordMatchValidator
@@ -54,7 +57,18 @@ export class RegistroEmpresaComponent implements OnInit {
   // Función para enviar el formulario
   onSubmit() {
     if (this.registroForm.valid) {
-      console.log(this.registroForm.value);
+      const formData = this.registroForm.value;
+      this.empresaService.registrarEmpresa(formData).subscribe({
+        next: response => {
+          console.log('Empresa registrada:', response);
+          alert('Empresa registrada con éxito');
+          this.registroForm.reset();
+        },
+        error: error => {
+          console.error('Error al registrar empresa:', error);
+          alert('Hubo un error al registrar la empresa');
+        }
+      });
     } else {
       console.log('Formulario no válido');
     }
