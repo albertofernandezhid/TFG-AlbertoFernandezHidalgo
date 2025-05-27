@@ -58,7 +58,6 @@ class Fichajes
     public function setId(int $id): static
     {
         $this->id = $id;
-
         return $this;
     }
 
@@ -70,7 +69,6 @@ class Fichajes
     public function setUsuarioId(int $usuario_id): static
     {
         $this->usuario_id = $usuario_id;
-
         return $this;
     }
 
@@ -82,7 +80,6 @@ class Fichajes
     public function setFechaHora(\DateTimeInterface $fecha_hora): static
     {
         $this->fecha_hora = $fecha_hora;
-
         return $this;
     }
 
@@ -94,7 +91,6 @@ class Fichajes
     public function setFecha(\DateTimeInterface $fecha): static
     {
         $this->fecha = $fecha;
-
         return $this;
     }
 
@@ -106,7 +102,6 @@ class Fichajes
     public function setHoraEntrada(\DateTimeInterface $hora_entrada): static
     {
         $this->hora_entrada = $hora_entrada;
-
         return $this;
     }
 
@@ -118,7 +113,6 @@ class Fichajes
     public function setHoraSalida(\DateTimeInterface $hora_salida): static
     {
         $this->hora_salida = $hora_salida;
-
         return $this;
     }
 
@@ -130,7 +124,6 @@ class Fichajes
     public function setTipo(?string $tipo): static
     {
         $this->tipo = $tipo;
-
         return $this;
     }
 
@@ -142,7 +135,6 @@ class Fichajes
     public function setLugar(?string $lugar): static
     {
         $this->lugar = $lugar;
-
         return $this;
     }
 
@@ -154,7 +146,6 @@ class Fichajes
     public function setEvento(?string $evento): static
     {
         $this->evento = $evento;
-
         return $this;
     }
 
@@ -166,7 +157,6 @@ class Fichajes
     public function setComentario(?string $comentario): static
     {
         $this->comentario = $comentario;
-
         return $this;
     }
 
@@ -178,7 +168,6 @@ class Fichajes
     public function setGastos(?float $gastos): static
     {
         $this->gastos = $gastos;
-
         return $this;
     }
 
@@ -190,7 +179,6 @@ class Fichajes
     public function setImagenUrl(?string $imagen_url): static
     {
         $this->imagen_url = $imagen_url;
-
         return $this;
     }
 
@@ -202,7 +190,6 @@ class Fichajes
     public function setCreatedAt(\DateTimeImmutable $created_at): static
     {
         $this->created_at = $created_at;
-
         return $this;
     }
 }
