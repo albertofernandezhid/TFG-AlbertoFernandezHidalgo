@@ -1,25 +1,49 @@
 <!-- src/app/components/empleados/empleados.component.html -->
 <div>
-  <table class="table-auto w-full">
+  <table class="table-auto w-full border-collapse border border-gray-300">
     <thead>
-      <tr>
-        <th class="px-4 py-2">Nombre</th>
-        <th class="px-4 py-2">Apellido</th>
-        <th class="px-4 py-2">Estado</th>
+      <tr class="bg-gray-100">
+        <th class="px-4 py-2 border">Nombre</th>
+        <th class="px-4 py-2 border">Apellido</th>
+        <th class="px-4 py-2 border">Estado</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let empleado of empleados" (click)="mostrarDetalles(empleado)">
+      <tr 
+        *ngFor="let empleado of empleados" 
+        (click)="mostrarDetalles(empleado)"
+        class="cursor-pointer hover:bg-gray-50"
+      >
         <td class="border px-4 py-2">{{ empleado.nombre }}</td>
         <td class="border px-4 py-2">{{ empleado.apellidos }}</td>
-        <td class="border px-4 py-2">{{ empleado.estado }}</td>
+        <td class="border px-4 py-2 text-center">
+          <input 
+            type="checkbox" 
+            [checked]="empleado.activo" 
+            (click)="$event.stopPropagation()" 
+            (change)="toggleActivo(empleado)" 
+            class="cursor-pointer"
+          />
+        </td>
       </tr>
     </tbody>
   </table>
 
-  <div *ngIf="empleadoSeleccionado">
-    <h3>Detalles del Empleado</h3>
-    <p><strong>Nombre:</strong> {{ empleadoSeleccionado.nombre }} {{ empleadoSeleccionado.apellidos }}</p>
-    <p><strong>Estado:</strong> {{ empleadoSeleccionado.estado }}</p>
+  <div *ngIf="empleadoSeleccionado" class="mt-6 p-4 border rounded shadow bg-white">
+    <h3 class="text-xl font-semibold mb-4">Detalles del empleado</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+      <div><strong>Nombre:</strong> {{ empleadoSeleccionado.nombre }}</div>
+      <div><strong>Apellidos:</strong> {{ empleadoSeleccionado.apellidos }}</div>
+      <div><strong>DNI:</strong> {{ empleadoSeleccionado.dni }}</div>
+      <div><strong>Teléfono:</strong> {{ empleadoSeleccionado.telefono_personal }}</div>
+      <div><strong>Email:</strong> {{ empleadoSeleccionado.email || '-' }}</div>
+      <div><strong>Provincia:</strong> {{ empleadoSeleccionado.provincia || '-' }}</div>
+      <div><strong>Municipio:</strong> {{ empleadoSeleccionado.municipio || '-' }}</div>
+      <div><strong>Calle:</strong> {{ empleadoSeleccionado.calle || '-' }}</div>
+      <div><strong>Código Postal:</strong> {{ empleadoSeleccionado.codigo_postal || '-' }}</div>
+      <div><strong>Usuario:</strong> {{ empleadoSeleccionado.usuario }}</div>
+      <div><strong>Rol:</strong> {{ empleadoSeleccionado.rol || '-' }}</div>
+      <div><strong>Creado el:</strong> {{ empleadoSeleccionado.created_at | date:'short' }}</div>
+    </div>
   </div>
 </div>

@@ -8,7 +8,6 @@ import { EMPRESAListaUsuariosService } from '../../../services/empresa-lista-usu
   standalone: true,
   templateUrl: './empleados.component.html',
   imports: [CommonModule]
-
 })
 export class EmpleadosComponent implements OnInit {
   empleados: any[] = [];
@@ -33,5 +32,24 @@ export class EmpleadosComponent implements OnInit {
 
   mostrarDetalles(empleado: any): void {
     this.empleadoSeleccionado = empleado;
+  }
+
+  toggleActivo(empleado: any): void {
+    const nuevoEstado = !empleado.activo;
+
+    this.empleadosService.actualizarEstadoActivo(empleado.id, nuevoEstado).subscribe({
+      next: () => {
+        empleado.activo = nuevoEstado;
+
+        if (this.empleadoSeleccionado && this.empleadoSeleccionado === empleado) {
+          this.empleadoSeleccionado.activo = nuevoEstado;
+        }
+
+        console.log(`Estado de usuario ${empleado.id} actualizado a ${nuevoEstado}`);
+      },
+      error: (err) => {
+        console.error('Error actualizando estado', err);
+      }
+    });
   }
 }

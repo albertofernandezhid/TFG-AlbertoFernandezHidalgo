@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class EMPRESACrearUsuariosService {
-  private apiUrl = 'http://localhost:8000/api/empleados'; // Cambia si tu backend usa otro puerto o subruta
+  private apiUrl = 'http://localhost:8000/usuarios';
 
   constructor(private http: HttpClient) {}
 

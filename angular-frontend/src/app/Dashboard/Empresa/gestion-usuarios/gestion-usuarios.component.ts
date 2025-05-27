@@ -5,24 +5,21 @@ import { EMPRESACrearUsuariosService } from '../../../services/empresa-crear-usu
 
 export function passwordMatchValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
-    const password = control.get('password');
+    const password = control.get('user_pass');
     const passwordRepeat = control.get('passwordRepeat');
 
     if (password && passwordRepeat && password.value !== passwordRepeat.value) {
       passwordRepeat.setErrors({ passwordMismatch: true });
       return { passwordMismatch: true };
     }
-    
+
     return null;
   };
 }
 
 export function dniValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
-    if (!control.value) {
-      return null;
-    }
-    
+    if (!control.value) return null;
     const dniRegex = /^[0-9]{8}[A-Z]$/;
     return dniRegex.test(control.value) ? null : { invalidDni: true };
   };
@@ -30,10 +27,7 @@ export function dniValidator(): ValidatorFn {
 
 export function phoneValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
-    if (!control.value) {
-      return null;
-    }
-    
+    if (!control.value) return null;
     const phoneRegex = /^[0-9]{9}$/;
     return phoneRegex.test(control.value) ? null : { invalidPhone: true };
   };
@@ -54,16 +48,18 @@ export class GestionUsuariosComponent implements OnInit {
       nombre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       apellidos: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
       dni: ['', [Validators.required, dniValidator()]],
-      fechaNacimiento: ['', Validators.required],
-      sexo: ['', Validators.required],
-      emailPersonal: ['', [Validators.required, Validators.email]],
-      telefonoPersonal: ['', [Validators.required, phoneValidator()]],
+      telefono_personal: ['', [Validators.required, phoneValidator()]],
+      email: ['', [Validators.email]], // opcional según modelo
       calle: [''],
-      ciudad: [''],
-      codigoPostal: ['', [Validators.pattern(/^[0-9]{5}$/)]],
-      username: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
-      password: ['', [Validators.required]],
+      provincia: [''],
+      municipio: [''],
+      codigo_postal: ['', [Validators.pattern(/^[0-9]{5}$/)]],
+      usuario: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
+      user_pass: ['', [Validators.required, Validators.minLength(6)]],
       passwordRepeat: ['', Validators.required],
+      rol: [{ value: 'Empleado', disabled: true }],
+      activo: [true],
+      empresa_id: [1], // Este valor puede cambiar dinámicamente desde sesión o localStorage
     }, { validators: passwordMatchValidator() });
   }
 
@@ -83,9 +79,9 @@ export class GestionUsuariosComponent implements OnInit {
   getErrorMessage(fieldName: string): string {
     const field = this.form.get(fieldName);
     if (!field || !field.errors) return '';
-    
+
     const errors = field.errors;
-    
+
     if (errors['required']) return 'Este campo es obligatorio';
     if (errors['email']) return 'Formato de email inválido';
     if (errors['minlength']) return `Mínimo ${errors['minlength'].requiredLength} caracteres`;
@@ -94,26 +90,25 @@ export class GestionUsuariosComponent implements OnInit {
     if (errors['invalidDni']) return 'DNI inválido (8 números y 1 letra)';
     if (errors['invalidPhone']) return 'Teléfono inválido (9 dígitos)';
     if (errors['passwordMismatch']) return 'Las contraseñas no coinciden';
-    
+
     return 'Campo inválido';
   }
 
   onlyDigits(event: any): boolean {
     const charCode = (event.which) ? event.which : event.keyCode;
-    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-      return false;
-    }
-    return true;
+    return !(charCode > 31 && (charCode < 48 || charCode > 57)) || false;
   }
 
   onSubmit() {
     this.submitted = true;
     console.log('Formulario enviado');
-    
+
     if (this.form.valid) {
       const userData = { ...this.form.value };
       delete userData.passwordRepeat;
-      
+
+      console.log('Datos que se enviarán al backend:', userData);
+
       this.usuariosService.crearUsuario(userData).subscribe({
         next: () => {
           alert('Usuario creado correctamente');
