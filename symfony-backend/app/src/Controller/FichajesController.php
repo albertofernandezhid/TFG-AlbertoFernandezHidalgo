@@ -41,7 +41,7 @@ class FichajesController extends AbstractController
             // Manejo de ENTRADA
             if ($tipo === 'entrada') {
                 if ($usarFechaHoraActual) {
-                    $now = new DateTime();
+                    $now = new DateTime('now', new \DateTimeZone('Europe/Madrid'));
                     $fichaje->setFecha($now);
                     $fichaje->setHoraEntrada($now);
                 } else {
