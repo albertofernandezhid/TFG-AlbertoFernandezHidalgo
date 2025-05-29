@@ -31,20 +31,46 @@ export class HistorialEmpleadoComponent {
   }
 
   cargarRegistros() {
-    this.http.get<any[]>('assets/registros.json').subscribe({
-      next: data => this.registros = data,
-      error: err => {
+    this.http.get<any[]>('http://localhost:8000/fichajes/listar').subscribe({
+      next: (data) => {
+        // Adaptar las propiedades para la tabla
+        this.registros = data.map((reg) => ({
+          tipo: reg.tipo || '',
+          fecha: reg.fecha,
+          entrada: reg.horaEntrada || '',
+          salida: reg.horaSalida || '',
+          totalHoras: this.calcularTotalHoras(reg.horaEntrada, reg.horaSalida),
+          lugar: reg.lugar || '',
+          evento: reg.evento || '',
+          comentarios: reg.comentarios || '',
+          gastos: reg.gastos || '',
+          archivos: reg.archivos || '',
+        }));
+      },
+      error: (err) => {
         console.error('Error cargando registros:', err);
         this.registros = [];
-      }
+      },
     });
   }
 
+  calcularTotalHoras(entrada: string, salida: string): string {
+    if (!entrada || !salida) return '';
+    const [hEntrada, mEntrada] = entrada.split(':').map(Number);
+    const [hSalida, mSalida] = salida.split(':').map(Number);
+
+    let totalMinutos = hSalida * 60 + mSalida - (hEntrada * 60 + mEntrada);
+    if (totalMinutos < 0) totalMinutos += 24 * 60;
+
+    const horas = Math.floor(totalMinutos / 60);
+    const minutos = totalMinutos % 60;
+
+    return `${horas}h ${minutos}m`;
+  }
+
   get registrosFiltrados() {
-    return this.registros.filter(r => {
-      const year = r.fecha.slice(0, 4);
-      const month = r.fecha.slice(5, 7);
-      return month === this.selectedMonth && year === this.selectedYear;
+    return this.registros.filter((r) => {
+      return r.tipo === 'salida';
     });
   }
 
@@ -63,16 +89,16 @@ export class HistorialEmpleadoComponent {
       { header: 'Evento', dataKey: 'evento' },
       { header: 'Comentarios', dataKey: 'comentarios' },
       { header: 'Gastos', dataKey: 'gastos' },
-      { header: 'Archivos', dataKey: 'archivos' }
+      { header: 'Archivos', dataKey: 'archivos' },
     ];
 
     (doc as any).autoTable({
-      head: [columns.map(col => col.header)],
-      body: this.registrosFiltrados.map(reg =>
-        columns.map(col => reg[col.dataKey] || '')
+      head: [columns.map((col) => col.header)],
+      body: this.registrosFiltrados.map((reg) =>
+        columns.map((col) => reg[col.dataKey] || '')
       ),
       startY: 30,
-      styles: { fontSize: 8 }
+      styles: { fontSize: 8 },
     });
 
     doc.save('registro_horario.pdf');

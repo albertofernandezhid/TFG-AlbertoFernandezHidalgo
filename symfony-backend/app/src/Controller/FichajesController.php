@@ -19,7 +19,7 @@ class FichajesController extends AbstractController
     {
         try {
             $data = json_decode($request->getContent(), true);
-            
+
             // Debug: Log de datos recibidos
             error_log('Datos recibidos: ' . json_encode($data));
 
@@ -41,7 +41,7 @@ class FichajesController extends AbstractController
             // Manejo de ENTRADA
             if ($tipo === 'entrada') {
                 if ($usarFechaHoraActual) {
-                    $now = new DateTime();
+                    $now = new DateTime('now', new \DateTimeZone('Europe/Madrid'));
                     $fichaje->setFecha($now);
                     $fichaje->setHoraEntrada($now);
                 } else {
@@ -49,15 +49,15 @@ class FichajesController extends AbstractController
                         error_log('Error entrada: Faltan fecha u hora_entrada');
                         return new JsonResponse(['error' => 'Para entrada manual se requieren fecha y hora_entrada.'], 400);
                     }
-                    
+
                     try {
                         $fechaEntrada = new DateTime($data['fecha']);
                         $horaEntrada = DateTime::createFromFormat('H:i', $data['hora_entrada']);
-                        
+
                         if (!$horaEntrada) {
                             return new JsonResponse(['error' => 'Formato de hora_entrada inválido. Use HH:MM'], 400);
                         }
-                        
+
                         $fichaje->setFecha($fechaEntrada);
                         $fichaje->setHoraEntrada($horaEntrada);
                     } catch (\Exception $e) {
@@ -65,7 +65,7 @@ class FichajesController extends AbstractController
                         return new JsonResponse(['error' => 'Formato de fecha u hora inválido.'], 400);
                     }
                 }
-                
+
                 // Para entrada, el lugar es opcional
                 if (!empty($data['lugar'])) {
                     $fichaje->setLugar($data['lugar']);
@@ -84,30 +84,30 @@ class FichajesController extends AbstractController
                     // Establecer fecha y hora de entrada (desde el registro de entrada)
                     $fechaSalida = new DateTime($data['fecha']);
                     $horaEntrada = DateTime::createFromFormat('H:i', $data['hora_entrada']);
-                    
+
                     if (!$horaEntrada) {
                         return new JsonResponse(['error' => 'Formato de hora_entrada inválido. Use HH:MM'], 400);
                     }
-                    
+
                     $fichaje->setFecha($fechaSalida);
                     $fichaje->setHoraEntrada($horaEntrada);
-                    
+
                     // Establecer hora de salida
                     if ($usarHoraSalidaActual) {
-                        $fichaje->setHoraSalida(new DateTime());
+                        $horaSalida = new DateTime('now', new \DateTimeZone('Europe/Madrid'));
                     } else {
                         if (empty($data['hora_salida'])) {
                             return new JsonResponse(['error' => 'Se requiere hora_salida cuando no se usa la hora actual.'], 400);
                         }
-                        
-                        $horaSalida = DateTime::createFromFormat('H:i', $data['hora_salida']);
+
+                        $horaSalida = DateTime::createFromFormat('H:i', $data['hora_salida'], new \DateTimeZone('Europe/Madrid'));
                         if (!$horaSalida) {
                             return new JsonResponse(['error' => 'Formato de hora_salida inválido. Use HH:MM'], 400);
                         }
-                        
-                        $fichaje->setHoraSalida($horaSalida);
                     }
-                    
+
+                    $fichaje->setHoraSalida($horaSalida);
+
                 } catch (\Exception $e) {
                     error_log('Error parseando fecha/hora salida: ' . $e->getMessage());
                     return new JsonResponse(['error' => 'Formato de fecha u hora inválido.'], 400);
@@ -115,7 +115,7 @@ class FichajesController extends AbstractController
 
                 // Campos obligatorios y opcionales para salida
                 $fichaje->setLugar($data['lugar']);
-                
+
                 if (!empty($data['evento'])) {
                     $fichaje->setEvento($data['evento']);
                 }
@@ -125,7 +125,7 @@ class FichajesController extends AbstractController
                 }
 
                 if (isset($data['gastos']) && is_numeric($data['gastos'])) {
-                    $fichaje->setGastos((float)$data['gastos']);
+                    $fichaje->setGastos((float) $data['gastos']);
                 }
 
                 if (!empty($data['imagen_url'])) {
@@ -148,4 +148,32 @@ class FichajesController extends AbstractController
             return new JsonResponse(['error' => 'Error interno del servidor.'], 500);
         }
     }
+
+    #[Route('/listar', name: 'listar_fichajes', methods: ['GET'])]
+    public function listarFichajes(EntityManagerInterface $em): JsonResponse
+    {
+        $fichajes = $em->getRepository(Fichajes::class)->findAll();
+
+        $data = array_map(function (Fichajes $fichaje) {
+            return [
+                'id' => $fichaje->getId(),
+                'usuario_id' => $fichaje->getUsuarioId(),
+                'fecha' => $fichaje->getFecha()?->format('Y-m-d'),
+                'horaEntrada' => $fichaje->getHoraEntrada()?->format('H:i'),
+                'horaSalida' => $fichaje->getHoraSalida()?->format('H:i'),
+                'tipo' => $fichaje->getTipo(),
+                'lugar' => $fichaje->getLugar(),
+                'evento' => $fichaje->getEvento(),
+                'comentarios' => $fichaje->getComentario(),
+                'gastos' => $fichaje->getGastos(),
+                'archivos' => $fichaje->getImagenUrl(),
+                'created_at' => $fichaje->getCreatedAt()?->format('c'),
+            ];
+        }, $fichajes);
+
+        return new JsonResponse($data, 200, [
+            'Access-Control-Allow-Origin' => '*'
+        ]);
+    }
+
 }
