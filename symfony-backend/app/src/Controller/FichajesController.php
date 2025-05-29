@@ -94,13 +94,13 @@ class FichajesController extends AbstractController
 
                     // Establecer hora de salida
                     if ($usarHoraSalidaActual) {
-                        $fichaje->setHoraSalida(new DateTime());
+                        $horaSalida = new DateTime('now', new \DateTimeZone('Europe/Madrid'));
                     } else {
                         if (empty($data['hora_salida'])) {
                             return new JsonResponse(['error' => 'Se requiere hora_salida cuando no se usa la hora actual.'], 400);
                         }
 
-                        $horaSalida = DateTime::createFromFormat('H:i', $data['hora_salida']);
+                        $horaSalida = DateTime::createFromFormat('H:i', $data['hora_salida'], new \DateTimeZone('Europe/Madrid'));
                         if (!$horaSalida) {
                             return new JsonResponse(['error' => 'Formato de hora_salida inválido. Use HH:MM'], 400);
                         }
