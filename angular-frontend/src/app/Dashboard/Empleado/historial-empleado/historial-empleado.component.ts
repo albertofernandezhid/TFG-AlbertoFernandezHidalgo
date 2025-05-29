@@ -35,6 +35,7 @@ export class HistorialEmpleadoComponent {
       next: (data) => {
         // Adaptar las propiedades para la tabla
         this.registros = data.map((reg) => ({
+          tipo: reg.tipo || '',
           fecha: reg.fecha,
           entrada: reg.horaEntrada || '',
           salida: reg.horaSalida || '',
@@ -69,9 +70,7 @@ export class HistorialEmpleadoComponent {
 
   get registrosFiltrados() {
     return this.registros.filter((r) => {
-      const year = r.fecha.slice(0, 4);
-      const month = r.fecha.slice(5, 7);
-      return month === this.selectedMonth && year === this.selectedYear;
+      return r.tipo === 'salida';
     });
   }
 
