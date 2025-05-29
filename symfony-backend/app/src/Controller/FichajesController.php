@@ -104,9 +104,9 @@ class FichajesController extends AbstractController
                         if (!$horaSalida) {
                             return new JsonResponse(['error' => 'Formato de hora_salida inválido. Use HH:MM'], 400);
                         }
-
-                        $fichaje->setHoraSalida($horaSalida);
                     }
+
+                    $fichaje->setHoraSalida($horaSalida);
 
                 } catch (\Exception $e) {
                     error_log('Error parseando fecha/hora salida: ' . $e->getMessage());
