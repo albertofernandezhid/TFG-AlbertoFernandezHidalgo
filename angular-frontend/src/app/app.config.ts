@@ -14,7 +14,7 @@ export const appConfig: ApplicationConfig = {
       domain: '',
       clientId: '',
       authorizationParams: {
-        redirect_uri: window.location.origin
+        redirect_uri: 'https://marktime.es'
       }
     }),
   ]

@@ -1,4 +1,4 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="grid grid-cols-1 md:grid-cols-2 gap-6 px-4 sm:px-6 lg:px-8">
 
   <!-- Datos personales -->
   <div class="col-span-full mb-2">
@@ -11,7 +11,7 @@
       Nombre <span class="text-red-500">*</span>
     </label>
     <input id="nombre" formControlName="nombre" type="text" placeholder="Nombre"
-      class="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+      class="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full"
       [ngClass]="{'border-gray-800': !isFieldInvalid('nombre'), 'border-red-500': isFieldInvalid('nombre')}" />
     <div *ngIf="isFieldInvalid('nombre')" class="text-red-500 text-xs mt-1">
       {{ getErrorMessage('nombre') }}
@@ -23,7 +23,7 @@
       Apellidos <span class="text-red-500">*</span>
     </label>
     <input id="apellidos" formControlName="apellidos" type="text" placeholder="Apellidos"
-      class="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+      class="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full"
       [ngClass]="{'border-gray-800': !isFieldInvalid('apellidos'), 'border-red-500': isFieldInvalid('apellidos')}" />
     <div *ngIf="isFieldInvalid('apellidos')" class="text-red-500 text-xs mt-1">
       {{ getErrorMessage('apellidos') }}
@@ -35,7 +35,7 @@
       DNI <span class="text-red-500">*</span>
     </label>
     <input id="dni" formControlName="dni" type="text" placeholder="12345678A"
-      class="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+      class="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full"
       [ngClass]="{'border-gray-800': !isFieldInvalid('dni'), 'border-red-500': isFieldInvalid('dni')}" />
     <div *ngIf="isFieldInvalid('dni')" class="text-red-500 text-xs mt-1">
       {{ getErrorMessage('dni') }}
@@ -47,7 +47,7 @@
       Teléfono Personal <span class="text-red-500">*</span>
     </label>
     <input id="telefono_personal" formControlName="telefono_personal" type="text" placeholder="123456789"
-      class="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+      class="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full"
       [ngClass]="{'border-gray-800': !isFieldInvalid('telefono_personal'), 'border-red-500': isFieldInvalid('telefono_personal')}"
       maxlength="9"
       (keypress)="onlyDigits($event)" />
@@ -61,7 +61,7 @@
       Email
     </label>
     <input id="email" formControlName="email" type="email" placeholder="ejemplo@correo.com"
-      class="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+      class="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full"
       [ngClass]="{'border-gray-800': !isFieldInvalid('email'), 'border-red-500': isFieldInvalid('email')}" />
     <div *ngIf="isFieldInvalid('email')" class="text-red-500 text-xs mt-1">
       {{ getErrorMessage('email') }}
@@ -76,26 +76,26 @@
   <div class="col-span-full flex flex-col">
     <label for="calle" class="text-sm text-black mb-1">Calle</label>
     <input id="calle" formControlName="calle" placeholder="Calle"
-      class="border border-gray-800 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+      class="border border-gray-800 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full" />
   </div>
 
-  <div class="col-span-full grid grid-cols-1 md:grid-cols-2 gap-6">
+  <div class="col-span-full grid grid-cols-1 sm:grid-cols-2 gap-6">
     <div class="flex flex-col">
       <label for="provincia" class="text-sm text-black mb-1">Provincia</label>
       <input id="provincia" formControlName="provincia" placeholder="Provincia"
-        class="border border-gray-800 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+        class="border border-gray-800 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full" />
     </div>
 
     <div class="flex flex-col">
       <label for="municipio" class="text-sm text-black mb-1">Municipio</label>
       <input id="municipio" formControlName="municipio" placeholder="Municipio"
-        class="border border-gray-800 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+        class="border border-gray-800 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full" />
     </div>
 
     <div class="flex flex-col">
       <label for="codigo_postal" class="text-sm text-black mb-1">Código Postal</label>
       <input id="codigo_postal" formControlName="codigo_postal" placeholder="CP"
-        class="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        class="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full"
         [ngClass]="{'border-gray-800': !isFieldInvalid('codigo_postal'), 'border-red-500': isFieldInvalid('codigo_postal')}" />
       <div *ngIf="isFieldInvalid('codigo_postal')" class="text-red-500 text-xs mt-1">
         {{ getErrorMessage('codigo_postal') }}
@@ -113,7 +113,7 @@
       Usuario <span class="text-red-500">*</span>
     </label>
     <input id="usuario" formControlName="usuario" placeholder="Usuario"
-      class="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+      class="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full"
       [ngClass]="{'border-gray-800': !isFieldInvalid('usuario'), 'border-red-500': isFieldInvalid('usuario')}" />
     <div *ngIf="isFieldInvalid('usuario')" class="text-red-500 text-xs mt-1">
       {{ getErrorMessage('usuario') }}
@@ -122,13 +122,13 @@
 
   <div></div> <!-- Espacio para mantener la cuadrícula -->
 
-  <div class="col-span-full grid grid-cols-1 md:grid-cols-2 gap-6">
+  <div class="col-span-full grid grid-cols-1 sm:grid-cols-2 gap-6">
     <div class="flex flex-col">
       <label for="user_pass" class="text-sm text-black mb-1">
         Contraseña <span class="text-red-500">*</span>
       </label>
       <input id="user_pass" type="password" formControlName="user_pass" placeholder="Contraseña"
-        class="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        class="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full"
         [ngClass]="{'border-gray-800': !isFieldInvalid('user_pass'), 'border-red-500': isFieldInvalid('user_pass')}" />
       <div *ngIf="isFieldInvalid('user_pass')" class="text-red-500 text-xs mt-1">
         {{ getErrorMessage('user_pass') }}
@@ -140,7 +140,7 @@
         Verificar contraseña <span class="text-red-500">*</span>
       </label>
       <input id="passwordRepeat" type="password" formControlName="passwordRepeat" placeholder="Verificar contraseña"
-        class="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        class="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full"
         [ngClass]="{'border-gray-800': !isFieldInvalid('passwordRepeat'), 'border-red-500': isFieldInvalid('passwordRepeat')}" />
       <div *ngIf="isFieldInvalid('passwordRepeat')" class="text-red-500 text-xs mt-1">
         {{ getErrorMessage('passwordRepeat') }}
@@ -148,10 +148,10 @@
     </div>
   </div>
 
-    <div class="flex flex-col">
+  <div class="flex flex-col">
     <label for="rol" class="text-sm text-black mb-1">Rol</label>
     <input id="rol" formControlName="rol" placeholder="Rol" value="Empleado" readonly
-      class="bg-gray-100 cursor-not-allowed border rounded-lg p-3 focus:outline-none"
+      class="bg-gray-100 cursor-not-allowed border rounded-lg p-3 focus:outline-none w-full"
       [ngClass]="{'border-gray-800': !isFieldInvalid('rol'), 'border-red-500': isFieldInvalid('rol')}" />
     <div *ngIf="isFieldInvalid('rol')" class="text-red-500 text-xs mt-1">
       {{ getErrorMessage('rol') }}
@@ -160,24 +160,22 @@
 
   <div class="flex flex-col">
     <label for="activo" class="text-sm text-black mb-1">Estado de usuario</label>
-    <div class="h-full w-full pl-5 flex items-center">
+    <div class="h-full w-full pl-1 sm:pl-5 flex items-center">
       <div class="flex items-center space-x-2">
-      <input id="activo" type="checkbox" formControlName="activo"
-        class="h-5 w-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500" />
-      <span class="text-sm text-gray-700">Activo</span>
+        <input id="activo" type="checkbox" formControlName="activo"
+          class="h-5 w-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500" />
+        <span class="text-sm text-gray-700">Activo</span>
+      </div>
     </div>
     <div *ngIf="isFieldInvalid('activo')" class="text-red-500 text-xs mt-1">
       {{ getErrorMessage('activo') }}
     </div>
-    </div>
-    
   </div>
-
 
   <div class="col-span-full flex justify-center mt-8">
     <button 
       type="submit" 
-      class="w-full sm:w-1/6 text-white py-3 rounded-lg cursor-pointer bg-blue-600 hover:bg-blue-700">
+      class="w-full sm:w-1/2 md:w-1/4 lg:w-1/6 text-white py-3 rounded-lg cursor-pointer bg-blue-600 hover:bg-blue-700 transition duration-200">
       Crear Usuario
     </button>
   </div>

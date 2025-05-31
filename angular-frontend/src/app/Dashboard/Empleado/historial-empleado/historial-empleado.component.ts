@@ -12,22 +12,35 @@ import 'jspdf-autotable';
   imports: [FormsModule, CommonModule],
 })
 export class HistorialEmpleadoComponent {
-  selectedMonth: string = new Date().toISOString().slice(5, 7);
-  selectedYear: string = new Date().getFullYear().toString();
+  selectedMonth: string = '';
+  selectedYear: string = '';
 
-  years: string[] = [];
+  availableMonths: { value: string; label: string }[] = [];
+  availableYears: string[] = [];
   registros: any[] = [];
 
-  constructor(private http: HttpClient) {
-    this.initYears();
-    this.cargarRegistros();
-  }
+  private monthNames = [
+    { value: '01', label: 'Enero' },
+    { value: '02', label: 'Febrero' },
+    { value: '03', label: 'Marzo' },
+    { value: '04', label: 'Abril' },
+    { value: '05', label: 'Mayo' },
+    { value: '06', label: 'Junio' },
+    { value: '07', label: 'Julio' },
+    { value: '08', label: 'Agosto' },
+    { value: '09', label: 'Septiembre' },
+    { value: '10', label: 'Octubre' },
+    { value: '11', label: 'Noviembre' },
+    { value: '12', label: 'Diciembre' }
+  ];
 
-  initYears() {
-    const currentYear = new Date().getFullYear();
-    for (let y = currentYear - 10; y <= currentYear + 1; y++) {
-      this.years.push(y.toString());
-    }
+  constructor(private http: HttpClient) {
+    this.cargarRegistros();
+    
+    // Recargar datos cada 30 segundos para detectar nuevos registros
+    setInterval(() => {
+      this.cargarRegistros();
+    }, 30000);
   }
 
   cargarRegistros() {
@@ -46,12 +59,85 @@ export class HistorialEmpleadoComponent {
           gastos: reg.gastos || '',
           archivos: reg.archivos || '',
         }));
+
+        // Actualizar los filtros disponibles después de cargar los datos
+        this.updateAvailableFilters();
       },
       error: (err) => {
         console.error('Error cargando registros:', err);
         this.registros = [];
+        this.availableMonths = [];
+        this.availableYears = [];
       },
     });
+  }
+
+  updateAvailableFilters() {
+    // Filtrar solo registros de tipo 'salida' que tienen fecha
+    const registrosSalida = this.registros.filter(r => r.tipo === 'salida' && r.fecha);
+    
+    if (registrosSalida.length === 0) {
+      this.availableMonths = [];
+      this.availableYears = [];
+      this.selectedMonth = '';
+      this.selectedYear = '';
+      return;
+    }
+
+    // Extraer años únicos de los registros
+    const yearsSet = new Set<string>();
+    registrosSalida.forEach(registro => {
+      const fecha = new Date(registro.fecha);
+      yearsSet.add(fecha.getFullYear().toString());
+    });
+    
+    this.availableYears = Array.from(yearsSet).sort((a, b) => parseInt(b) - parseInt(a)); // Más recientes primero
+
+    // Si no hay año seleccionado o el año seleccionado ya no existe, seleccionar el más reciente
+    if (!this.selectedYear || !this.availableYears.includes(this.selectedYear)) {
+      this.selectedYear = this.availableYears[0] || '';
+    }
+
+    // Actualizar meses disponibles para el año seleccionado
+    this.updateAvailableMonths();
+  }
+
+  updateAvailableMonths() {
+    if (!this.selectedYear) {
+      this.availableMonths = [];
+      this.selectedMonth = '';
+      return;
+    }
+
+    // Filtrar registros del año seleccionado
+    const registrosDelAño = this.registros.filter(r => {
+      if (r.tipo !== 'salida' || !r.fecha) return false;
+      const fecha = new Date(r.fecha);
+      return fecha.getFullYear().toString() === this.selectedYear;
+    });
+
+    // Extraer meses únicos
+    const monthsSet = new Set<string>();
+    registrosDelAño.forEach(registro => {
+      const fecha = new Date(registro.fecha);
+      const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
+      monthsSet.add(mes);
+    });
+
+    // Crear array de meses disponibles con sus nombres
+    const availableMonthValues = Array.from(monthsSet).sort();
+    this.availableMonths = availableMonthValues.map(month => {
+      const monthName = this.monthNames.find(m => m.value === month);
+      return {
+        value: month,
+        label: monthName ? monthName.label : month
+      };
+    });
+
+    // Si no hay mes seleccionado o el mes seleccionado ya no existe para este año, seleccionar el más reciente
+    if (!this.selectedMonth || !availableMonthValues.includes(this.selectedMonth)) {
+      this.selectedMonth = availableMonthValues[availableMonthValues.length - 1] || '';
+    }
   }
 
   calcularTotalHoras(entrada: string, salida: string): string {
@@ -69,9 +155,45 @@ export class HistorialEmpleadoComponent {
   }
 
   get registrosFiltrados() {
-    return this.registros.filter((r) => {
-      return r.tipo === 'salida';
-    });
+    return this.registros
+      .filter((r) => {
+        // Solo registros de tipo 'salida'
+        if (r.tipo !== 'salida') return false;
+        
+        // Filtrar por mes y año seleccionados
+        if (r.fecha && this.selectedMonth && this.selectedYear) {
+          const fechaRegistro = new Date(r.fecha);
+          const mesRegistro = (fechaRegistro.getMonth() + 1).toString().padStart(2, '0');
+          const añoRegistro = fechaRegistro.getFullYear().toString();
+          
+          return mesRegistro === this.selectedMonth && añoRegistro === this.selectedYear;
+        }
+        
+        return false;
+      })
+      .sort((a, b) => {
+        // Ordenar por fecha descendente (más recientes primero)
+        if (!a.fecha || !b.fecha) return 0;
+        
+        const fechaA = new Date(a.fecha);
+        const fechaB = new Date(b.fecha);
+        
+        return fechaB.getTime() - fechaA.getTime();
+      });
+  }
+
+  // Método para actualizar cuando cambie el año
+  onYearChange() {
+    this.updateAvailableMonths();
+  }
+
+  // Método para actualizar cuando cambie el mes
+  onMonthChange() {
+    // No necesita lógica adicional ya que registrosFiltrados es un getter
+  }
+
+  get showYearFilter(): boolean {
+    return this.availableYears.length > 1;
   }
 
   exportPdf() {
