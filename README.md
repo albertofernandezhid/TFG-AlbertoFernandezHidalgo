@@ -15,18 +15,18 @@
 
 ## 📚 Índice
 
-- [🕒 MarkTime – Introducción](#-marktime--control-horario-digital-para-empresas)
+- [🕒 MarkTime – Introducción](#-marktime--introducción)
 - [✨ Funcionalidades clave](#-funcionalidades-clave)
 - [🎯 Motivación](#-motivación)
-- [🔐 Infraestructura y Seguridad](#-infraestructura-y-seguridad)
+- [🔐 Infraestructura y seguridad](#-infraestructura-y-seguridad)
 - [📋 Diagrama de casos de uso](#-diagrama-de-casos-de-uso)
 - [🃏 Diseño de interfaz](#-diseño-de-interfaz)
-- [🐳 Guía de Despliegue](#-guía-de-despliegue)
+- [🐳 Guía de despliegue](#-guía-de-despliegue)
 - [📄 Licencia](#-licencia)
 
 ---
 
-# 🕒 MarkTime – Control Horario Digital para Empresas
+# 🕒 MarkTime – Introducción
 
 **MarkTime** es una aplicación web moderna desarrollada como parte de un proyecto de fin de grado, cuyo objetivo principal es digitalizar y simplificar el control horario en las empresas. 
 
